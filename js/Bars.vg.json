@@ -1,0 +1,43 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    
+    "title": "Flight phase and cause of the crash",
+    
+    "data": {
+      "url": "https://raw.githubusercontent.com/Kadheegit/Assignment-2/main/Plane%20Crashes.csv",
+      "format": {"parse": {"date": "date"}}
+      
+    },
+    
+    "transform": [{"calculate": "hours(datum.date)", "as": "time"}],
+    "repeat": {"column": ["Crash cause", "Flight phase"]},
+    "spec": {
+      "layer": [
+        {
+        "params": [{
+          "name": "brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }],
+        "mark": "bar",
+        "encoding": {
+          "x": {
+            "field": {"repeat": "column"}
+            
+          },
+          "y": {"aggregate": "count"},
+          "color": {"value": "#ddd"}
+        }
+      }, { 
+        "transform": [{"filter": {"param": "brush"}}],
+        "mark": "bar",
+        "encoding": {
+          "x": {
+            "field": {"repeat": "column"}
+            
+          },
+          "y": {"aggregate": "count"}
+        }
+      }]
+    }
+  }
+  

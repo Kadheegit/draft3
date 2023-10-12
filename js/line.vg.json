@@ -1,0 +1,49 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 230,
+    "height": 450,
+    "description": "Stock prices of 5 Tech Companies over Time.",
+    "data": {"url": "https://raw.githubusercontent.com/Kadheegit/Assignment-2/main/Plane%20Crashes.csv"},
+    "params": [
+        {
+        "name": "Continent_selection",
+        "bind": {
+            "input": "select",
+            "options": [
+            null,
+            "Royal Air Force - RAF",
+            "United States Signal Corps - USSC",
+            "U.S. Air Mail Service",
+            "Private French",
+            "Avro Air Transport",
+            "South African Air Force"
+            ],
+            "labels":[
+            "Show All",
+            "Royal Air Force - RAF",
+            "United States Signal Corps - USSC",
+            "U.S. Air Mail Service",
+            "Private French",
+            "Avro Air Transport",
+            "South African Air Force"
+            ],
+            "name": "Operator selection: "
+            }
+            }
+            ],
+            "transform": [
+                {"filter": "Continent_selection == null || datum.Operator == Continent_selection"}
+                
+            ],
+
+                
+        
+    "mark": "line",
+    "encoding": {
+      "x": {"field": "Date", "type": "temporal"},
+      "y": {"aggregate": "count", "field": "Operator", "type": "quantitative"},
+      "color": {"field": "Operator", "type": "nominal"}
+
+        
+    }
+  }
